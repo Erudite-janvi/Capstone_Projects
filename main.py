@@ -69,9 +69,23 @@ def allowed_special_character(password):
 
 
 def start_with_digit(password):
-    if (password[0].isdigit() and password[1].isdigit) or (password[0] in "!@#$%^&*()_-~"):
-        return True
+    digit_count = 0
+    special_count = 0
+        
+    for char in password:
+        if char.isdigit():
+            digit_count += 1
+            if digit_count >= 2:
+                return True
+        elif char in "!@#$%^&*()_-~":
+            special_count += 1
+            if special_count >= 1:
+                return True
+        else:
+            break
+    
     return False
+
 
 
 def check_consecutive_char(password):
