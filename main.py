@@ -14,12 +14,9 @@ def user_Password():
     print("- Should not contain 5 same characters or numbers consecutively")
     print("- Should not contain the username")
     print("- Should not have 3 same special characters consecutively")
-
-    password = input("Enter password: ").strip()
-    print("Entered password:", password)
     
 
-    return password
+    
 
 
 def password_length_validator(password):
@@ -171,9 +168,11 @@ def passwordValidator(username, password):
 
 def main():
     username = user_login()
+    password = user_Password()
     valid_password = False
     while not valid_password:
-        password = user_Password()
+        
+        password = input("Enter password: ").strip()
         valid_password = passwordValidator(username, password)
        
     print("Valid Password")
