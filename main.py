@@ -16,9 +16,6 @@ def user_Password():
     print("- Should not have 3 same special characters consecutively")
     
 
-    
-
-
 def password_length_validator(password):
     min_length = 12
     max_length = 20
@@ -115,6 +112,15 @@ def Consecutive_Special(password):
         elif password[i] != password[i + 1]:
             count = 1
     return True
+def username_validator(username):
+    while username == "" or " " in username:
+        if username == "":
+            print("Username cannot be empty.")
+        else:
+            print("Username cannot contain spaces.")
+        username = input("Please enter a valid username: ")
+    return username
+
 
 
 def passwordValidator(username, password):
@@ -153,6 +159,7 @@ def passwordValidator(username, password):
     if not Consecutive_Special(password):
         errors.append(
             "Password cannot contain three consecutive special characters")
+  
 
     # to Check if any errors were found
     if errors:
@@ -163,20 +170,38 @@ def passwordValidator(username, password):
 
     else:
         return True
-        
-
-
 def main():
     username = user_login()
-    password = user_Password()
-    valid_password = False
-    while not valid_password:
-        
-        password = input("Enter password: ").strip()
-        valid_password = passwordValidator(username, password)
-       
-    print("Valid Password")
+    username_valid  = username_validator(username)
+    user_password = user_Password()
+    attempts = 0
+    while attempts < 6:
+        password_input = input("Enter password: ").strip()
+        print("----> your last entered username: ", username + " and your last entered password: ", password_input)
+        valid_password = passwordValidator(username, password_input)
+        if valid_password:
+            print("Valid Password")
+            break
+        else:
+            attempts += 1
+            if attempts == 3:
+                choice = input("Do you want to continue? (yes/no): ").lower()
+                if choice == 'yes':
+                    print("You have 3 more attempts.")
+                elif choice == 'no':
+                    print("Thank you for using. Exiting...")
+                
+            elif attempts == 6:
+                print("You have reached maximum attempts. Please enter your username and password again.")
+                username = user_login()
+                username_valid  = username_validator(username)
+                user_password = user_Password()
+                
+                attempts = 0  
+                continue  
 
+            print(f"Invalid Password. Attempts left: {6 - attempts}")
 
 if __name__ == "__main__":
     main()
+
