@@ -123,6 +123,7 @@ def username_validator(username):
 
 
 
+
 def passwordValidator(username, password):
     errors = []
 
@@ -190,7 +191,7 @@ def main():
                     print("You have 3 more attempts.")
                 elif choice == 'no':
                     print("Thank you for using. Exiting...")
-                
+                    break
             elif attempts == 6:
                 print("You have reached maximum attempts. Please enter your username and password again.")
                 username = user_login()
